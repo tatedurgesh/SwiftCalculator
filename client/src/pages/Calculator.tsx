@@ -28,38 +28,38 @@ export default function Calculator() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-ios-gray-light dark:bg-black overflow-hidden">
+    <div className="h-screen max-h-screen flex flex-col bg-ios-gray-light dark:bg-black overflow-hidden">
       <StatusBar />
       
       {/* Top Navigation */}
-      <div className="flex items-center justify-between px-4 py-3 bg-ios-gray-light dark:bg-black">
+      <div className="flex items-center justify-between px-3 py-2 bg-ios-gray-light dark:bg-black">
         <button 
           onClick={toggleTheme}
           className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-sm calculator-button"
         >
           {theme === 'dark' ? (
-            <Sun className="w-5 h-5 text-black dark:text-white" />
+            <Sun className="w-4 h-4 text-black dark:text-white" />
           ) : (
-            <Moon className="w-5 h-5 text-black dark:text-white" />
+            <Moon className="w-4 h-4 text-black dark:text-white" />
           )}
         </button>
 
-        <h1 className="text-lg font-semibold text-black dark:text-white">Calculator</h1>
+        <h1 className="text-base font-semibold text-black dark:text-white">Calculator</h1>
 
         <button 
           onClick={() => setIsMenuOpen(true)}
           className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-sm calculator-button"
         >
-          <Menu className="w-5 h-5 text-black dark:text-white" />
+          <Menu className="w-4 h-4 text-black dark:text-white" />
         </button>
       </div>
 
       {/* Calculator Mode Selector */}
-      <div className="px-4 mb-4">
+      <div className="px-3 mb-2">
         <div className="flex bg-white dark:bg-gray-800 rounded-xl p-1 shadow-sm">
           <button
             onClick={() => setMode('basic')}
-            className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 ${
+            className={`flex-1 py-2 px-2 rounded-lg text-xs font-medium transition-all duration-200 ${
               mode === 'basic' 
                 ? 'ios-orange text-white' 
                 : 'text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
@@ -69,7 +69,7 @@ export default function Calculator() {
           </button>
           <button
             onClick={() => setMode('scientific')}
-            className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 ${
+            className={`flex-1 py-2 px-2 rounded-lg text-xs font-medium transition-all duration-200 ${
               mode === 'scientific' 
                 ? 'ios-orange text-white' 
                 : 'text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
@@ -79,7 +79,7 @@ export default function Calculator() {
           </button>
           <button
             onClick={() => setMode('converter')}
-            className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 ${
+            className={`flex-1 py-2 px-2 rounded-lg text-xs font-medium transition-all duration-200 ${
               mode === 'converter' 
                 ? 'ios-orange text-white' 
                 : 'text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
@@ -91,14 +91,14 @@ export default function Calculator() {
       </div>
 
       {/* Display Area */}
-      <div className="px-4">
+      <div className="px-3 flex-shrink-0">
         {mode !== 'converter' && (
           <DisplayArea expression={expression} result={result} />
         )}
       </div>
 
       {/* Calculator Interface */}
-      <div className="flex-1 px-4 pb-4 overflow-hidden">
+      <div className="flex-1 px-3 pb-safe-area-inset-bottom overflow-hidden flex flex-col justify-end">
         {mode === 'basic' && (
           <BasicCalculator onCalculate={handleCalculation} />
         )}
