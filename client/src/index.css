@@ -96,6 +96,11 @@
     -webkit-user-select: none;
   }
 
+  /* Light mode button outlines */
+  .light .calculator-button:not(.bg-orange-500) {
+    @apply border border-gray-300;
+  }
+
   .ios-blur {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);

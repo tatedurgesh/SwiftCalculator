@@ -24,13 +24,19 @@ export function useCalculator() {
         return {
           ...prev,
           expression: value,
+          result: '0',
           isError: false,
         };
       }
       
+      // Auto-clear result when new input is entered
+      const shouldClearResult = prev.previousResult !== null && prev.expression === prev.result;
+      
       return {
         ...prev,
-        expression: prev.expression + value,
+        expression: shouldClearResult ? value : prev.expression + value,
+        result: shouldClearResult ? '0' : prev.result,
+        previousResult: shouldClearResult ? null : prev.previousResult,
       };
     });
   }, []);
@@ -169,7 +175,7 @@ export function useCalculator() {
       }
       
       return {
-        expression: '',
+        expression: calculationResult.result,
         result: calculationResult.result,
         isError: false,
         lastOperator: null,
@@ -212,6 +218,15 @@ export function useCalculator() {
     });
   }, []);
 
+  const setExpression = useCallback((newExpression: string) => {
+    setState(prev => ({
+      ...prev,
+      expression: newExpression,
+      result: '0',
+      isError: false,
+    }));
+  }, []);
+
   return {
     ...state,
     addNumber,
@@ -223,5 +238,6 @@ export function useCalculator() {
     clear,
     calculate,
     addScientificFunction,
+    setExpression,
   };
 }

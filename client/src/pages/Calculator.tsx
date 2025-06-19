@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sun, Moon, Menu } from 'lucide-react';
+import { Sun, Moon, Calculator as CalcIcon, Sigma, RotateCcw, History } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
 import { useHistory } from '@/hooks/useHistory';
 import { useCalculator } from '@/hooks/useCalculator';
@@ -7,7 +7,6 @@ import { DisplayArea } from '@/components/DisplayArea';
 import { ScientificCalculator } from '@/components/ScientificCalculator';
 import { UnitConverter } from '@/components/UnitConverter';
 import { HistoryModal } from '@/components/HistoryModal';
-import { MenuModal } from '@/components/MenuModal';
 
 type CalculatorMode = 'basic' | 'scientific' | 'converter';
 
@@ -17,10 +16,14 @@ export default function Calculator() {
   const calculator = useCalculator();
   const [mode, setMode] = useState<CalculatorMode>('basic');
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 
   const handleCalculation = (expr: string, res: string) => {
     addToHistory(expr, res);
+  };
+
+  const handleExpressionChange = (newExpression: string) => {
+    calculator.setExpression(newExpression);
   };
 
   return (
@@ -40,12 +43,7 @@ export default function Calculator() {
 
         <h1 className="text-lg font-semibold text-black dark:text-white">Calculator</h1>
 
-        <button 
-          onClick={() => setIsMenuOpen(true)}
-          className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-sm calculator-button"
-        >
-          <Menu className="w-5 h-5 text-black dark:text-white" />
-        </button>
+        <div className="w-9"></div> {/* Spacer for symmetry */}
       </div>
 
       {/* Calculator Mode Selector */}
@@ -53,33 +51,39 @@ export default function Calculator() {
         <div className="flex bg-white dark:bg-gray-800 rounded-xl p-1 shadow-sm">
           <button
             onClick={() => setMode('basic')}
-            className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+            className={`flex-1 py-2 px-2 rounded-lg transition-all duration-200 flex items-center justify-center ${
               mode === 'basic' 
-                ? 'ios-orange text-white' 
+                ? 'bg-orange-500 text-white' 
                 : 'text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
-            Basic
+            <CalcIcon className="w-4 h-4" />
           </button>
           <button
             onClick={() => setMode('scientific')}
-            className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+            className={`flex-1 py-2 px-2 rounded-lg transition-all duration-200 flex items-center justify-center ${
               mode === 'scientific' 
-                ? 'ios-orange text-white' 
+                ? 'bg-orange-500 text-white' 
                 : 'text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
-            Scientific
+            <Sigma className="w-4 h-4" />
           </button>
           <button
             onClick={() => setMode('converter')}
-            className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+            className={`flex-1 py-2 px-2 rounded-lg transition-all duration-200 flex items-center justify-center ${
               mode === 'converter' 
-                ? 'ios-orange text-white' 
+                ? 'bg-orange-500 text-white' 
                 : 'text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
-            Convert
+            <RotateCcw className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => setIsHistoryOpen(true)}
+            className="flex-1 py-2 px-2 rounded-lg transition-all duration-200 flex items-center justify-center text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+          >
+            <History className="w-4 h-4" />
           </button>
         </div>
       </div>
@@ -87,7 +91,11 @@ export default function Calculator() {
       {/* Display Area */}
       <div className="px-4 flex-shrink-0">
         {mode !== 'converter' && (
-          <DisplayArea expression={calculator.expression} result={calculator.result} />
+          <DisplayArea 
+            expression={calculator.expression} 
+            result={calculator.result}
+            onExpressionChange={handleExpressionChange}
+          />
         )}
       </div>
 
@@ -98,25 +106,25 @@ export default function Calculator() {
             <div className="grid grid-cols-4 gap-4 w-full max-w-xs mx-auto">
               {/* Row 1 */}
               <button 
-                className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={calculator.clear}
               >
                 C
               </button>
               <button 
-                className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={calculator.addBrackets}
               >
                 ()
               </button>
               <button 
-                className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={calculator.addPercentage}
               >
                 %
               </button>
               <button 
-                className="calculator-button ios-orange text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-orange-500 text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
                 onClick={() => calculator.addOperator('divide')}
               >
                 ÷
@@ -124,25 +132,25 @@ export default function Calculator() {
               
               {/* Row 2 */}
               <button 
-                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={() => calculator.addNumber('7')}
               >
                 7
               </button>
               <button 
-                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={() => calculator.addNumber('8')}
               >
                 8
               </button>
               <button 
-                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={() => calculator.addNumber('9')}
               >
                 9
               </button>
               <button 
-                className="calculator-button ios-orange text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-orange-500 text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
                 onClick={() => calculator.addOperator('multiply')}
               >
                 ×
@@ -150,25 +158,25 @@ export default function Calculator() {
               
               {/* Row 3 */}
               <button 
-                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={() => calculator.addNumber('4')}
               >
                 4
               </button>
               <button 
-                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={() => calculator.addNumber('5')}
               >
                 5
               </button>
               <button 
-                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={() => calculator.addNumber('6')}
               >
                 6
               </button>
               <button 
-                className="calculator-button ios-orange text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-orange-500 text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
                 onClick={() => calculator.addOperator('subtract')}
               >
                 −
@@ -176,25 +184,25 @@ export default function Calculator() {
               
               {/* Row 4 */}
               <button 
-                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={() => calculator.addNumber('1')}
               >
                 1
               </button>
               <button 
-                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={() => calculator.addNumber('2')}
               >
                 2
               </button>
               <button 
-                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={() => calculator.addNumber('3')}
               >
                 3
               </button>
               <button 
-                className="calculator-button ios-orange text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-orange-500 text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
                 onClick={() => calculator.addOperator('add')}
               >
                 +
@@ -202,25 +210,25 @@ export default function Calculator() {
               
               {/* Row 5 */}
               <button 
-                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={calculator.toggleSign}
               >
                 +/−
               </button>
               <button 
-                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={() => calculator.addNumber('0')}
               >
                 0
               </button>
               <button 
-                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center border border-gray-400 dark:border-transparent"
                 onClick={calculator.addDecimal}
               >
                 .
               </button>
               <button 
-                className="calculator-button ios-pink text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
+                className="calculator-button bg-orange-500 text-white rounded-full aspect-square text-lg font-medium shadow-sm flex items-center justify-center"
                 onClick={() => {
                   const expressionBeforeCalc = calculator.expression;
                   if (expressionBeforeCalc) {
@@ -254,11 +262,7 @@ export default function Calculator() {
         onClearHistory={clearHistory}
       />
 
-      <MenuModal
-        isOpen={isMenuOpen}
-        onClose={() => setIsMenuOpen(false)}
-        onShowHistory={() => setIsHistoryOpen(true)}
-      />
+
     </div>
   );
 }
