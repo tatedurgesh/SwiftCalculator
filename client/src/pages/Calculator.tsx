@@ -98,16 +98,18 @@ export default function Calculator() {
       </div>
 
       {/* Calculator Interface */}
-      <div className="flex-1 px-3 pb-safe-area-inset-bottom overflow-hidden flex flex-col justify-end">
-        {mode === 'basic' && (
-          <BasicCalculator onCalculate={handleCalculation} />
-        )}
-        {mode === 'scientific' && (
-          <ScientificCalculator onCalculate={handleCalculation} />
-        )}
-        {mode === 'converter' && (
-          <UnitConverter />
-        )}
+      <div className="flex-1 px-3 pb-4 overflow-hidden flex flex-col justify-end">
+        <div className="w-full max-w-md mx-auto">
+          {mode === 'basic' && (
+            <BasicCalculator onCalculate={handleCalculation} />
+          )}
+          {mode === 'scientific' && (
+            <ScientificCalculator onCalculate={handleCalculation} />
+          )}
+          {mode === 'converter' && (
+            <UnitConverter />
+          )}
+        </div>
       </div>
 
       {/* Modals */}

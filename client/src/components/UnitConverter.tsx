@@ -71,84 +71,84 @@ export function UnitConverter() {
       </div>
 
       {/* Converter Keypad */}
-      <div className="grid grid-cols-4 gap-2 mt-4">
+      <div className="grid grid-cols-4 gap-3 mt-4 max-w-sm mx-auto">
         <button 
-          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px]"
+          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full w-full h-16 text-base font-medium shadow-sm"
           onClick={() => converter.addDigitToValue('7')}
         >
           7
         </button>
         <button 
-          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px]"
+          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full w-full h-16 text-base font-medium shadow-sm"
           onClick={() => converter.addDigitToValue('8')}
         >
           8
         </button>
         <button 
-          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px]"
+          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full w-full h-16 text-base font-medium shadow-sm"
           onClick={() => converter.addDigitToValue('9')}
         >
           9
         </button>
         <button 
-          className="calculator-button ios-orange text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px]"
+          className="calculator-button ios-orange text-white rounded-full w-full h-16 text-base font-medium shadow-sm"
           onClick={converter.deleteLastDigit}
         >
           ×
         </button>
         
         <button 
-          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px]"
+          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full w-full h-16 text-base font-medium shadow-sm"
           onClick={() => converter.addDigitToValue('4')}
         >
           4
         </button>
         <button 
-          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px]"
+          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full w-full h-16 text-base font-medium shadow-sm"
           onClick={() => converter.addDigitToValue('5')}
         >
           5
         </button>
         <button 
-          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px]"
+          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full w-full h-16 text-base font-medium shadow-sm"
           onClick={() => converter.addDigitToValue('6')}
         >
           6
         </button>
         <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px]"
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-16 text-base font-medium shadow-sm"
           onClick={converter.clearValue}
         >
           C
         </button>
         
         <button 
-          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px]"
+          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full w-full h-16 text-base font-medium shadow-sm"
           onClick={() => converter.addDigitToValue('1')}
         >
           1
         </button>
         <button 
-          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px]"
+          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full w-full h-16 text-base font-medium shadow-sm"
           onClick={() => converter.addDigitToValue('2')}
         >
           2
         </button>
         <button 
-          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px]"
+          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full w-full h-16 text-base font-medium shadow-sm"
           onClick={() => converter.addDigitToValue('3')}
         >
           3
         </button>
         <button 
-          className="calculator-button ios-teal text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px] flex items-center justify-center"
+          className="calculator-button ios-teal text-white rounded-full w-full h-16 text-base font-medium shadow-sm flex items-center justify-center"
           onClick={converter.swapUnits}
         >
           <ArrowUpDown className="w-4 h-4" />
         </button>
         
         <button 
-          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px]"
+          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full w-full h-16 text-base font-medium shadow-sm"
           onClick={() => {
             const value = converter.fromValue;
             if (value.startsWith('-')) {
@@ -161,19 +161,19 @@ export function UnitConverter() {
           +/−
         </button>
         <button 
-          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px]"
+          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full w-full h-16 text-base font-medium shadow-sm"
           onClick={() => converter.addDigitToValue('0')}
         >
           0
         </button>
         <button 
-          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px]"
+          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full w-full h-16 text-base font-medium shadow-sm"
           onClick={() => converter.addDigitToValue('.')}
         >
           .
         </button>
         <button 
-          className="calculator-button ios-teal text-white rounded-full aspect-square text-base font-medium shadow-sm min-h-[50px] max-h-[70px] flex items-center justify-center"
+          className="calculator-button ios-teal text-white rounded-full w-full h-16 text-base font-medium shadow-sm flex items-center justify-center"
           onClick={converter.swapUnits}
         >
           <ArrowDown className="w-4 h-4" />
