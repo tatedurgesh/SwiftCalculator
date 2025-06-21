@@ -192,14 +192,14 @@ export function useCalculator() {
       if (func === 'pi') {
         return {
           ...prev,
-          expression: prev.expression + CONSTANTS.pi.toString(),
+          expression: prev.expression + 'π',
         };
       }
       
       if (func === 'e') {
         return {
           ...prev,
-          expression: prev.expression + CONSTANTS.e.toString(),
+          expression: prev.expression + 'e',
         };
       }
 
@@ -218,17 +218,24 @@ export function useCalculator() {
       
       if (functionsWithParens.includes(func)) {
         const functionName = func === 'pow10' ? '10^' : 
-                           func === 'cbrt' ? 'cbrt' :
-                           func === 'asin' ? 'asin' :
-                           func === 'acos' ? 'acos' :
-                           func === 'atan' ? 'atan' :
-                           func === 'abs' ? 'abs' :
+                           func === 'cbrt' ? '∛' :
+                           func === 'asin' ? 'sin⁻¹' :
+                           func === 'acos' ? 'cos⁻¹' :
+                           func === 'atan' ? 'tan⁻¹' :
+                           func === 'abs' ? '|' :
                            func;
         
         if (func === 'pow10') {
           return {
             ...prev,
             expression: prev.expression + '10^(',
+          };
+        }
+        
+        if (func === 'abs') {
+          return {
+            ...prev,
+            expression: prev.expression + '|',
           };
         }
         
@@ -240,9 +247,9 @@ export function useCalculator() {
       
       // For operations that work on the current number
       if (['square', 'cube', 'reciprocal', 'factorial'].includes(func)) {
-        const operation = func === 'square' ? '^2' :
-                         func === 'cube' ? '^3' :
-                         func === 'reciprocal' ? '^(-1)' :
+        const operation = func === 'square' ? '²' :
+                         func === 'cube' ? '³' :
+                         func === 'reciprocal' ? '⁻¹' :
                          func === 'factorial' ? '!' : '';
         
         return {

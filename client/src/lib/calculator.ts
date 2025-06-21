@@ -28,20 +28,16 @@ export function evaluateExpression(expression: string): CalculationResult {
       .replace(/−/g, '-')
       .replace(/,/g, '') // Remove commas from numbers
       .replace(/\^/g, '**') // Replace ^ with ** for power
-      // Handle scientific functions
-      .replace(/sin\(/g, 'sin(')
-      .replace(/cos\(/g, 'cos(')
-      .replace(/tan\(/g, 'tan(')
-      .replace(/asin\(/g, 'asin(')
-      .replace(/acos\(/g, 'acos(')
-      .replace(/atan\(/g, 'atan(')
-      .replace(/ln\(/g, 'log(')
-      .replace(/log\(/g, 'log10(')
-      .replace(/sqrt\(/g, 'sqrt(')
-      .replace(/cbrt\(/g, 'cbrt(')
-      .replace(/exp\(/g, 'exp(')
-      .replace(/abs\(/g, 'abs(')
-      .replace(/10\^\(/g, '10**(')
+      .replace(/π/g, 'pi')
+      .replace(/e(?![0-9])/g, 'e') // Replace e constant
+      .replace(/²/g, '^2')
+      .replace(/³/g, '^3')
+      .replace(/⁻¹/g, '^(-1)')
+      .replace(/∛/g, 'cbrt')
+      .replace(/sin⁻¹/g, 'asin')
+      .replace(/cos⁻¹/g, 'acos')
+      .replace(/tan⁻¹/g, 'atan')
+      .replace(/\|([^|]+)\|/g, 'abs($1)') // Handle absolute value
       .replace(/!/g, '!'); // Factorial
 
     const result = math.evaluate(mathExpression);

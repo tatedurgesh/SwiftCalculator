@@ -63,15 +63,17 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
         </button>
         <button 
           className="calculator-button bg-gray-700 text-white rounded-2xl w-full h-14 text-sm font-medium shadow-sm flex items-center justify-center"
-          onClick={() => addScientificFunction('sin')}
+          onClick={() => addScientificFunction(isSecondFunction ? 'asin' : 'sin')}
         >
-          sin
+          {isSecondFunction ? 'sin⁻¹' : 'sin'}
         </button>
         <button 
-          className="calculator-button bg-gray-700 text-white rounded-2xl w-full h-14 text-sm font-medium shadow-sm flex items-center justify-center"
+          className={`calculator-button rounded-2xl w-full h-14 text-sm font-medium shadow-sm flex items-center justify-center ${
+            isSecondFunction ? 'bg-orange-500 text-white' : 'bg-gray-700 text-white'
+          }`}
           onClick={toggleSecondFunction}
         >
-          ↻
+          2nd
         </button>
 
         {/* Row 2 */}
@@ -95,9 +97,9 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
         </button>
         <button 
           className="calculator-button bg-gray-700 text-white rounded-2xl w-full h-14 text-sm font-medium shadow-sm flex items-center justify-center"
-          onClick={() => addScientificFunction('cos')}
+          onClick={() => addScientificFunction(isSecondFunction ? 'acos' : 'cos')}
         >
-          cos
+          {isSecondFunction ? 'cos⁻¹' : 'cos'}
         </button>
         <button 
           className={`calculator-button rounded-2xl w-full h-14 text-sm font-medium shadow-sm flex items-center justify-center ${
@@ -107,7 +109,7 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
           }`}
           onClick={toggleAngleMode}
         >
-          Rad
+          {angleMode.toUpperCase()}
         </button>
 
         {/* Row 3 */}
@@ -131,15 +133,15 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
         </button>
         <button 
           className="calculator-button bg-gray-700 text-white rounded-2xl w-full h-14 text-sm font-medium shadow-sm flex items-center justify-center"
-          onClick={() => addScientificFunction('tan')}
+          onClick={() => addScientificFunction(isSecondFunction ? 'atan' : 'tan')}
         >
-          tan
+          {isSecondFunction ? 'tan⁻¹' : 'tan'}
         </button>
         <button 
           className="calculator-button bg-gray-700 text-white rounded-2xl w-full h-14 text-sm font-medium shadow-sm flex items-center justify-center"
-          onClick={() => addScientificFunction('sqrt')}
+          onClick={() => addScientificFunction(isSecondFunction ? 'cbrt' : 'sqrt')}
         >
-          √
+          {isSecondFunction ? '∛' : '√'}
         </button>
 
         {/* Row 4 */}
