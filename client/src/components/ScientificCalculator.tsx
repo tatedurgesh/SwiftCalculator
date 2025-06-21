@@ -36,12 +36,13 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
-      {/* Landscape Scientific Calculator Layout - 5 rows x 8 columns */}
-      <div className="grid grid-cols-8 gap-2">
-        {/* Row 1 */}
+    <div className="w-full max-w-sm mx-auto">
+      {/* Mobile Portrait Scientific Calculator Layout - 5 columns */}
+      <div className="grid grid-cols-5 gap-3">
+        
+        {/* Row 1 - Function Controls */}
         <button 
-          className={`calculator-button rounded-full aspect-square text-sm font-medium shadow-sm border ${
+          className={`calculator-button rounded-full aspect-square text-xs font-medium shadow-sm border ${
             isSecondFunction 
               ? 'bg-orange-500 text-white' 
               : 'bg-gray-300 dark:bg-gray-600 text-black dark:text-white border-gray-400 dark:border-transparent'
@@ -51,7 +52,7 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
           2nd
         </button>
         <button 
-          className={`calculator-button rounded-full aspect-square text-sm font-medium shadow-sm border ${
+          className={`calculator-button rounded-full aspect-square text-xs font-medium shadow-sm border ${
             angleMode === 'rad' 
               ? 'bg-orange-500 text-white' 
               : 'bg-gray-300 dark:bg-gray-600 text-black dark:text-white border-gray-400 dark:border-transparent'
@@ -61,7 +62,7 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
           {angleMode}
         </button>
         <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
           onClick={() => addScientificFunction(isSecondFunction ? 'cbrt' : 'sqrt')}
         >
           {isSecondFunction ? '∛x' : '√x'}
@@ -73,45 +74,27 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
           C
         </button>
         <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={calculator.addBrackets}
-        >
-          ( )
-        </button>
-        <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={calculator.addPercentage}
-        >
-          %
-        </button>
-        <button 
           className="calculator-button bg-orange-500 text-white rounded-full aspect-square text-lg font-medium shadow-sm"
           onClick={() => calculator.addOperator('divide')}
         >
           ÷
         </button>
-        <button 
-          className="calculator-button bg-orange-500 text-white rounded-full aspect-square text-lg font-medium shadow-sm"
-          onClick={() => calculator.addOperator('multiply')}
-        >
-          ×
-        </button>
 
-        {/* Row 2 */}
+        {/* Row 2 - Trigonometric Functions */}
         <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
           onClick={() => addScientificFunction(isSecondFunction ? 'asin' : 'sin')}
         >
           {isSecondFunction ? 'sin⁻¹' : 'sin'}
         </button>
         <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
           onClick={() => addScientificFunction(isSecondFunction ? 'acos' : 'cos')}
         >
           {isSecondFunction ? 'cos⁻¹' : 'cos'}
         </button>
         <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
           onClick={() => addScientificFunction(isSecondFunction ? 'atan' : 'tan')}
         >
           {isSecondFunction ? 'tan⁻¹' : 'tan'}
@@ -123,10 +106,62 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
           7
         </button>
         <button 
+          className="calculator-button bg-orange-500 text-white rounded-full aspect-square text-lg font-medium shadow-sm"
+          onClick={() => calculator.addOperator('multiply')}
+        >
+          ×
+        </button>
+
+        {/* Row 3 - Logarithmic Functions */}
+        <button 
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => addScientificFunction(isSecondFunction ? 'exp' : 'ln')}
+        >
+          {isSecondFunction ? 'e^x' : 'ln'}
+        </button>
+        <button 
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => addScientificFunction(isSecondFunction ? 'pow10' : 'log')}
+        >
+          {isSecondFunction ? '10^x' : 'log'}
+        </button>
+        <button 
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => addScientificFunction('reciprocal')}
+        >
+          1/x
+        </button>
+        <button 
           className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm border border-gray-400 dark:border-transparent"
           onClick={() => calculator.addNumber('8')}
         >
           8
+        </button>
+        <button 
+          className="calculator-button bg-orange-500 text-white rounded-full aspect-square text-lg font-medium shadow-sm"
+          onClick={() => calculator.addOperator('subtract')}
+        >
+          −
+        </button>
+
+        {/* Row 4 - Power Functions */}
+        <button 
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => addScientificFunction(isSecondFunction ? 'cube' : 'square')}
+        >
+          {isSecondFunction ? 'x³' : 'x²'}
+        </button>
+        <button 
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => calculator.addOperator('power')}
+        >
+          x^y
+        </button>
+        <button 
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => addScientificFunction('pi')}
+        >
+          π
         </button>
         <button 
           className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm border border-gray-400 dark:border-transparent"
@@ -136,35 +171,29 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
         </button>
         <button 
           className="calculator-button bg-orange-500 text-white rounded-full aspect-square text-lg font-medium shadow-sm"
-          onClick={() => calculator.addOperator('subtract')}
-        >
-          −
-        </button>
-        <button 
-          className="calculator-button bg-orange-500 text-white rounded-full aspect-square text-lg font-medium shadow-sm"
           onClick={() => calculator.addOperator('add')}
         >
           +
         </button>
 
-        {/* Row 3 */}
+        {/* Row 5 - Additional Functions */}
         <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => addScientificFunction(isSecondFunction ? 'exp' : 'ln')}
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => addScientificFunction('abs')}
         >
-          {isSecondFunction ? 'e^x' : 'ln'}
+          |x|
         </button>
         <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => addScientificFunction(isSecondFunction ? 'pow10' : 'log')}
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => addScientificFunction('e')}
         >
-          {isSecondFunction ? '10^x' : 'log'}
+          e
         </button>
         <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => addScientificFunction('reciprocal')}
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => addScientificFunction(isSecondFunction ? 'factorial' : 'random')}
         >
-          1/x
+          {isSecondFunction ? 'x!' : 'Rand'}
         </button>
         <button 
           className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm border border-gray-400 dark:border-transparent"
@@ -178,40 +207,19 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
         >
           5
         </button>
-        <button 
-          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => calculator.addNumber('6')}
-        >
-          6
-        </button>
-        <div className="row-span-2">
-          <button 
-            className="calculator-button bg-orange-500 text-white rounded-full w-full h-full text-lg font-medium shadow-sm flex items-center justify-center"
-            onClick={handleCalculate}
-          >
-            =
-          </button>
-        </div>
-        <div></div> {/* Empty space for the tall equals button */}
 
-        {/* Row 4 */}
+        {/* Row 6 - Numbers and Operations */}
         <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => addScientificFunction(isSecondFunction ? 'cube' : 'square')}
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={calculator.addBrackets}
         >
-          {isSecondFunction ? 'x³' : 'x²'}
+          ( )
         </button>
         <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => calculator.addOperator('power')}
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={calculator.addPercentage}
         >
-          x^y
-        </button>
-        <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => addScientificFunction('pi')}
-        >
-          π
+          %
         </button>
         <button 
           className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm border border-gray-400 dark:border-transparent"
@@ -221,37 +229,18 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
         </button>
         <button 
           className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => calculator.addNumber('6')}
+        >
+          6
+        </button>
+        <button 
+          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm border border-gray-400 dark:border-transparent"
           onClick={() => calculator.addNumber('2')}
         >
           2
         </button>
-        <button 
-          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => calculator.addNumber('3')}
-        >
-          3
-        </button>
-        <div></div> {/* Empty space for the tall equals button */}
 
-        {/* Row 5 */}
-        <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => addScientificFunction('abs')}
-        >
-          |x|
-        </button>
-        <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => addScientificFunction('e')}
-        >
-          e
-        </button>
-        <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => addScientificFunction(isSecondFunction ? 'factorial' : 'random')}
-        >
-          {isSecondFunction ? 'x!' : 'Rand'}
-        </button>
+        {/* Row 7 - Final Row */}
         <button 
           className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-sm font-medium shadow-sm border border-gray-400 dark:border-transparent"
           onClick={calculator.toggleSign}
@@ -266,11 +255,22 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
         </button>
         <button 
           className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => calculator.addNumber('3')}
+        >
+          3
+        </button>
+        <button 
+          className="calculator-button bg-white dark:bg-gray-800 text-black dark:text-white rounded-full aspect-square text-lg font-medium shadow-sm border border-gray-400 dark:border-transparent"
           onClick={calculator.addDecimal}
         >
           .
         </button>
-        <div></div> {/* Empty space */}
+        <button 
+          className="calculator-button bg-orange-500 text-white rounded-full aspect-square text-lg font-medium shadow-sm"
+          onClick={handleCalculate}
+        >
+          =
+        </button>
       </div>
     </div>
   );
