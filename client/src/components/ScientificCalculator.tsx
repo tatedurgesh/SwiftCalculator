@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useCalculator } from '@/hooks/useCalculator';
 
 interface ScientificCalculatorProps {
@@ -6,6 +7,8 @@ interface ScientificCalculatorProps {
 
 export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps) {
   const calculator = useCalculator();
+  const [angleMode, setAngleMode] = useState<'deg' | 'rad'>('deg');
+  const [isSecondFunction, setIsSecondFunction] = useState(false);
 
   const handleCalculate = () => {
     const expressionBeforeCalc = calculator.expression;
@@ -17,73 +20,116 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
     }, 0);
   };
 
+  const toggleAngleMode = () => {
+    setAngleMode(prev => prev === 'deg' ? 'rad' : 'deg');
+  };
+
+  const toggleSecondFunction = () => {
+    setIsSecondFunction(prev => !prev);
+  };
+
+  const addScientificFunction = (func: string) => {
+    calculator.addScientificFunction(func, angleMode);
+    setIsSecondFunction(false); // Reset after use
+  };
+
   return (
     <div className="w-full max-w-sm mx-auto">
-      {/* Scientific Functions Row 1 */}
-      <div className="grid grid-cols-5 gap-2 mb-3">
+      {/* Mode Controls */}
+      <div className="grid grid-cols-3 gap-2 mb-3">
         <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => calculator.addScientificFunction('sin')}
+          className={`calculator-button rounded-lg h-8 text-xs font-medium shadow-sm border ${
+            angleMode === 'deg' 
+              ? 'bg-orange-500 text-white' 
+              : 'bg-gray-300 dark:bg-gray-600 text-black dark:text-white border-gray-400 dark:border-transparent'
+          }`}
+          onClick={toggleAngleMode}
         >
-          sin
+          {angleMode.toUpperCase()}
         </button>
         <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => calculator.addScientificFunction('cos')}
+          className={`calculator-button rounded-lg h-8 text-xs font-medium shadow-sm border ${
+            isSecondFunction 
+              ? 'bg-blue-500 text-white' 
+              : 'bg-gray-300 dark:bg-gray-600 text-black dark:text-white border-gray-400 dark:border-transparent'
+          }`}
+          onClick={toggleSecondFunction}
         >
-          cos
+          2nd
         </button>
         <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => calculator.addScientificFunction('tan')}
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-lg h-8 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => addScientificFunction('pi')}
         >
-          tan
-        </button>
-        <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => calculator.addScientificFunction('ln')}
-        >
-          ln
-        </button>
-        <button 
-          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => calculator.addScientificFunction('log')}
-        >
-          log
+          π
         </button>
       </div>
 
-      {/* Scientific Functions Row 2 */}
+      {/* Scientific Functions Row 1 - Trigonometric */}
       <div className="grid grid-cols-5 gap-2 mb-3">
         <button 
           className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => calculator.addScientificFunction('sqrt')}
+          onClick={() => addScientificFunction(isSecondFunction ? 'asin' : 'sin')}
         >
-          √
+          {isSecondFunction ? 'sin⁻¹' : 'sin'}
         </button>
         <button 
           className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => calculator.addScientificFunction('square')}
+          onClick={() => addScientificFunction(isSecondFunction ? 'acos' : 'cos')}
         >
-          x²
+          {isSecondFunction ? 'cos⁻¹' : 'cos'}
         </button>
         <button 
           className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => calculator.addScientificFunction('power')}
+          onClick={() => addScientificFunction(isSecondFunction ? 'atan' : 'tan')}
+        >
+          {isSecondFunction ? 'tan⁻¹' : 'tan'}
+        </button>
+        <button 
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => addScientificFunction(isSecondFunction ? 'pow10' : 'log')}
+        >
+          {isSecondFunction ? '10^x' : 'log'}
+        </button>
+        <button 
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => addScientificFunction(isSecondFunction ? 'exp' : 'ln')}
+        >
+          {isSecondFunction ? 'e^x' : 'ln'}
+        </button>
+      </div>
+
+      {/* Scientific Functions Row 2 - Powers & Roots */}
+      <div className="grid grid-cols-5 gap-2 mb-3">
+        <button 
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => addScientificFunction(isSecondFunction ? 'cbrt' : 'sqrt')}
+        >
+          {isSecondFunction ? '∛' : '√'}
+        </button>
+        <button 
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => addScientificFunction(isSecondFunction ? 'cube' : 'square')}
+        >
+          {isSecondFunction ? 'x³' : 'x²'}
+        </button>
+        <button 
+          className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
+          onClick={() => calculator.addOperator('power')}
         >
           x^y
         </button>
         <button 
           className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => calculator.addScientificFunction('pi')}
+          onClick={() => addScientificFunction('e')}
         >
-          π
+          e
         </button>
         <button 
           className="calculator-button bg-gray-300 dark:bg-gray-600 text-black dark:text-white rounded-full w-full h-12 text-xs font-medium shadow-sm border border-gray-400 dark:border-transparent"
-          onClick={() => calculator.addScientificFunction('e')}
+          onClick={() => addScientificFunction('reciprocal')}
         >
-          e
+          1/x
         </button>
       </div>
 

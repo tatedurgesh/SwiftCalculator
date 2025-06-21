@@ -54,13 +54,14 @@ export function useCalculator() {
         'subtract': '−',
         'multiply': '×',
         'divide': '÷',
+        'power': '^',
       };
       
       const symbol = operatorSymbols[operator as keyof typeof operatorSymbols] || operator;
       
       // Replace last operator if expression ends with one
       const lastChar = prev.expression.slice(-1);
-      if (['+', '−', '×', '÷'].includes(lastChar)) {
+      if (['+', '−', '×', '÷', '^'].includes(lastChar)) {
         return {
           ...prev,
           expression: prev.expression.slice(0, -1) + symbol,
@@ -81,7 +82,7 @@ export function useCalculator() {
       if (prev.isError) return prev;
       
       // Check if current number already has a decimal
-      const parts = prev.expression.split(/[+−×÷]/);
+      const parts = prev.expression.split(/[+−×÷^]/);
       const currentNumber = parts[parts.length - 1];
       
       if (currentNumber.includes('.')) {
@@ -184,7 +185,7 @@ export function useCalculator() {
     });
   }, []);
 
-  const addScientificFunction = useCallback((func: string) => {
+  const addScientificFunction = useCallback((func: string, angleMode: 'deg' | 'rad' = 'deg') => {
     setState(prev => {
       if (prev.isError) return prev;
       
@@ -203,11 +204,41 @@ export function useCalculator() {
       }
       
       // For functions that need parentheses
-      const functionsWithParens = ['sin', 'cos', 'tan', 'ln', 'log', 'sqrt'];
+      const functionsWithParens = [
+        'sin', 'cos', 'tan', 'asin', 'acos', 'atan',
+        'ln', 'log', 'sqrt', 'cbrt', 'exp', 'pow10'
+      ];
+      
       if (functionsWithParens.includes(func)) {
+        const functionName = func === 'pow10' ? '10^' : 
+                           func === 'cbrt' ? 'cbrt' :
+                           func === 'asin' ? 'asin' :
+                           func === 'acos' ? 'acos' :
+                           func === 'atan' ? 'atan' :
+                           func;
+        
+        if (func === 'pow10') {
+          return {
+            ...prev,
+            expression: prev.expression + '10^(',
+          };
+        }
+        
         return {
           ...prev,
-          expression: prev.expression + func + '(',
+          expression: prev.expression + functionName + '(',
+        };
+      }
+      
+      // For operations that work on the current number
+      if (['square', 'cube', 'reciprocal'].includes(func)) {
+        const operation = func === 'square' ? '^2' :
+                         func === 'cube' ? '^3' :
+                         func === 'reciprocal' ? '^(-1)' : '';
+        
+        return {
+          ...prev,
+          expression: prev.expression + operation,
         };
       }
       
