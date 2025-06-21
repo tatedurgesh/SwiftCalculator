@@ -202,11 +202,18 @@ export function useCalculator() {
           expression: prev.expression + CONSTANTS.e.toString(),
         };
       }
+
+      if (func === 'random') {
+        return {
+          ...prev,
+          expression: prev.expression + Math.random().toString(),
+        };
+      }
       
       // For functions that need parentheses
       const functionsWithParens = [
         'sin', 'cos', 'tan', 'asin', 'acos', 'atan',
-        'ln', 'log', 'sqrt', 'cbrt', 'exp', 'pow10'
+        'ln', 'log', 'sqrt', 'cbrt', 'exp', 'pow10', 'abs'
       ];
       
       if (functionsWithParens.includes(func)) {
@@ -215,6 +222,7 @@ export function useCalculator() {
                            func === 'asin' ? 'asin' :
                            func === 'acos' ? 'acos' :
                            func === 'atan' ? 'atan' :
+                           func === 'abs' ? 'abs' :
                            func;
         
         if (func === 'pow10') {
@@ -231,10 +239,11 @@ export function useCalculator() {
       }
       
       // For operations that work on the current number
-      if (['square', 'cube', 'reciprocal'].includes(func)) {
+      if (['square', 'cube', 'reciprocal', 'factorial'].includes(func)) {
         const operation = func === 'square' ? '^2' :
                          func === 'cube' ? '^3' :
-                         func === 'reciprocal' ? '^(-1)' : '';
+                         func === 'reciprocal' ? '^(-1)' :
+                         func === 'factorial' ? '!' : '';
         
         return {
           ...prev,

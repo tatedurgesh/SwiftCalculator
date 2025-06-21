@@ -17,7 +17,6 @@ export default function Calculator() {
   const [mode, setMode] = useState<CalculatorMode>('basic');
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
-
   const handleCalculation = (expr: string, res: string) => {
     addToHistory(expr, res);
   };
@@ -261,8 +260,6 @@ export default function Calculator() {
         history={history}
         onClearHistory={clearHistory}
       />
-
-
     </div>
   );
 }

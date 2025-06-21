@@ -40,7 +40,9 @@ export function evaluateExpression(expression: string): CalculationResult {
       .replace(/sqrt\(/g, 'sqrt(')
       .replace(/cbrt\(/g, 'cbrt(')
       .replace(/exp\(/g, 'exp(')
-      .replace(/10\^\(/g, '10**(');
+      .replace(/abs\(/g, 'abs(')
+      .replace(/10\^\(/g, '10**(')
+      .replace(/!/g, '!'); // Factorial
 
     const result = math.evaluate(mathExpression);
     
@@ -95,6 +97,8 @@ export function calculateScientificFunction(func: string, value: number, angleMo
       return 1 / value;
     case 'abs':
       return math.abs(value);
+    case 'factorial':
+      return math.factorial(value);
     default:
       return value;
   }
