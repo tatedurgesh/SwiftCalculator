@@ -42,10 +42,12 @@ export function useCalculator() {
   }, []);
 
   const addNumber = useCallback((number: string) => {
+    console.log('Adding number:', number); // Debug log
     addToExpression(number);
   }, [addToExpression]);
 
   const addOperator = useCallback((operator: string) => {
+    console.log('Adding operator:', operator); // Debug log
     setState(prev => {
       if (prev.isError) return prev;
       
@@ -78,6 +80,7 @@ export function useCalculator() {
   }, []);
 
   const addDecimal = useCallback(() => {
+    console.log('Adding decimal'); // Debug log
     setState(prev => {
       if (prev.isError) return prev;
       
@@ -152,6 +155,7 @@ export function useCalculator() {
   }, []);
 
   const clear = useCallback(() => {
+    console.log('Clearing calculator'); // Debug log
     setState({
       expression: '',
       result: '0',
@@ -162,6 +166,7 @@ export function useCalculator() {
   }, []);
 
   const calculate = useCallback(() => {
+    console.log('Calculating:', state.expression); // Debug log
     setState(prev => {
       if (!prev.expression) return prev;
       
@@ -183,9 +188,10 @@ export function useCalculator() {
         previousResult: calculationResult.result,
       };
     });
-  }, []);
+  }, [state.expression]);
 
   const addScientificFunction = useCallback((func: string, angleMode: 'deg' | 'rad' = 'deg') => {
+    console.log('Adding scientific function:', func); // Debug log
     setState(prev => {
       if (prev.isError) return prev;
       

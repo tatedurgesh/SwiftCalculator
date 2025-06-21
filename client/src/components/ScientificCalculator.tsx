@@ -39,10 +39,10 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
 
   return (
     <div className="w-full max-w-lg mx-auto">
-      {/* Scientific Calculator Layout - Landscape mode with 5 columns, 7 rows */}
+      {/* Scientific Calculator Layout - Exact match to image: 5 columns, 7 rows */}
       <div className="grid grid-cols-5 gap-2">
         
-        {/* Row 1 */}
+        {/* Row 1 - Top scientific functions */}
         <button 
           className="calculator-button bg-gray-700 text-white rounded-2xl w-full h-14 text-sm font-medium shadow-sm flex items-center justify-center"
           onClick={() => addScientificFunction('reciprocal')}
@@ -53,7 +53,7 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
           className="calculator-button bg-gray-700 text-white rounded-2xl w-full h-14 text-sm font-medium shadow-sm flex items-center justify-center"
           onClick={() => addScientificFunction('e')}
         >
-          e
+          eˣ
         </button>
         <button 
           className="calculator-button bg-gray-700 text-white rounded-2xl w-full h-14 text-sm font-medium shadow-sm flex items-center justify-center"
@@ -109,7 +109,7 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
           }`}
           onClick={toggleAngleMode}
         >
-          {angleMode.toUpperCase()}
+          Rad
         </button>
 
         {/* Row 3 */}
@@ -141,7 +141,7 @@ export function ScientificCalculator({ onCalculate }: ScientificCalculatorProps)
           className="calculator-button bg-gray-700 text-white rounded-2xl w-full h-14 text-sm font-medium shadow-sm flex items-center justify-center"
           onClick={() => addScientificFunction(isSecondFunction ? 'cbrt' : 'sqrt')}
         >
-          {isSecondFunction ? '∛' : '√'}
+          √
         </button>
 
         {/* Row 4 */}
